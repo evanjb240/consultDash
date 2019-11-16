@@ -102,9 +102,10 @@
 .small-num__container{
   display: inline-block;
   min-width: 175px;
-  margin-left: -40px;
+  margin-left: -190px;
+  margin-top: 365px;
 }
-.small-number, .small-number--default{
+.small-number, .small-number--default, .small-number-three, .small-number-three--default{
   color: #fff;
   display: inline-block;
   width: 29px;
@@ -112,13 +113,14 @@
   text-align: right;
   padding-right: 10px;
 }
-.small-number--default{
+.small-number--default, .small-number-three--default{
   color: #292630;
 }
 .small-number--default:first-child{
   padding-right: 19px;
 }
-.small-number:last-child, .small-number--default:last-child{
+.small-number:last-child, .small-number--default:last-child, 
+.small-number-three:last-child, .small-number-three--default:last-child{
   padding-right: 0;
 }
 .rpm{
@@ -138,7 +140,8 @@
   width: 9px;
   transform: translateY(10px);
 }
-.small-number, .small-number--default, [class*=" rpm__"] {
+.small-number, .small-number--default, 
+.small-number-three, .small-number-three--default, [class*=" rpm__"] {
     /* use !important to prevent issues with browser extensions that change fonts */
     font-family: 'small numbers' !important;
     speak: none;
@@ -163,38 +166,48 @@
   font-size: 20px;
 }
 
-.small-number--0:before {
+.small-number--0:before, 
+.small-number-three--0:before {
     content: "\e900";
 }
-.small-number--1:before {
+.small-number--1:before, 
+.small-number-three--1:before  {
     content: "\e901";
 }
-.small-number--2:before {
+.small-number--2:before, 
+.small-number-three--2:before  {
     content: "\e902";
 }
-.small-number--3:before {
+.small-number--3:before, 
+.small-number-three--3:before  {
     content: "\e903";
 }
-.small-number--4:before {
+.small-number--4:before, 
+.small-number-three--4:before  {
     content: "\e904";
 }
-.small-number--5:before {
+.small-number--5:before, 
+.small-number-three--5:before  {
     content: "\e905";
 }
-.small-number--6:before {
+.small-number--6:before, 
+.small-number-three--6:before  {
     content: "\e906";
 }
-.small-number--7:before {
+.small-number--7:before, 
+.small-number-three--7:before  {
     content: "\e907";
 }
-.small-number--8:before, .small-number--default:before {
+.small-number--8:before, .small-number--default:before, 
+.small-number-three--8:before, .small-number-three--default:before   {
     content: "\e908";
 }
-.small-number--9:before {
+.small-number--9:before, 
+.small-number-three--9:before  {
     content: "\e909";
 }
 .rpm-num__container{
-  background: #423E4A;
+  background: #34323b;
   padding: 10px;
   border-radius: 4px;
   display: inline-block;
@@ -291,15 +304,23 @@ body {
   background: #423E4A;
 }
 
-.mph, .mph--background{
+.mph{
   font-family: "big numbers";
   color: #ffffff;
   font-size: 145px;
-  line-height: 145px;
+  line-height: 150px;
   margin: 0;
   text-align: center;
   letter-spacing: -48px;
   position: absolute;
+}
+.mph--background{
+  font-family: "big numbers";
+  font-size: 145px;
+  line-height: 150px;
+  letter-spacing: -48px;
+  position: absolute;
+  vertical-align: middle;
 }
 .mph__label{
   text-align: center;
@@ -312,13 +333,14 @@ body {
 }
 .mph__container{
   width: 278px;
-  height: 145px;
+  height: 146px;
   margin: 150px auto 0;
+  vertical-align: middle;
   /*overflow: hidden;*/
 }
 .mph__number--default{
   margin-right: 25px;
-  color: #423E4A;
+  color: #34323b;
   width: 76px;
 }
 .mph__number--default:last-child{

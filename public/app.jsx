@@ -112,6 +112,41 @@ var Dash = React.createClass({
 			</div>
 		);
 	},
+	renderSmallHundredsNumbers: function (number) {
+		var rpm = number;
+		var hundreds = "small-number-three small-number-three";
+		var tens = "small-number-three small-number-three";
+		var ones = "small-number-three small-number-three";
+		if (rpm > 99){
+			hundreds += "--" + (rpm + "")[0]
+			tens += "--" + (rpm + "")[1]
+			ones += "--" + (rpm % 10)
+		} else if (rpm > 9){
+			hundreds += "--default"
+			tens += "--" + (rpm + "")[0]
+			ones += "--" + (rpm % 10)
+		} else {
+			hundreds += "--default"
+			tens += "--default"
+			ones += "--" + (rpm % 10)
+		}
+		return (
+			<div className="rpm-num__container">
+				<div className="rpm">
+					<span className={hundreds}></span>
+					<span className={tens}></span>
+					<span className={ones}></span>
+				</div>
+				<div className="rpm--background">
+					<span className='small-number-three--default'></span>
+					<span className='small-number-three--default'></span>
+					<span className='small-number-three--default'></span>
+				</div>
+			</div>
+
+				
+		);
+	},
 	tempMarker: function (num, background) {
 		var divClass = !background ? "temp__marker" : "temp__marker--background"
 		var colors = ["#7BE7EC", "#89E8DC", "#96E9CE", "#A0EAC1", "#ABEBB4", "#BAEDA4", "#C5ED96", "#D1EE88", "#DDF07B", "#ECF16A", "#F0E966", "#F0DD68", "#F1D069", "#F2C36B", "#F3C36B", "#F4AA6E", "#F49D6F", "#F58F71", "#F58372", "#F77674"]
@@ -159,6 +194,13 @@ var Dash = React.createClass({
 						<p className="small-number__label">RPM</p>
 				</div>
 				<div className="temp__container">
+					<ul>
+						<li className='temp-column'>
+							{ this.renderSmallHundredsNumbers(this.state.coolantTemp) }
+							<p className="small-number__label">Coolant</p>
+						</li>
+					</ul>
+					
 						{this.tempMarkers(this.state.coolantTemp)}
 				</div>
 			</span>
@@ -176,7 +218,7 @@ var Dash = React.createClass({
 						{ this.renderMPH() }
 					</li>
 					<li className='temp-column'>
-						{ this.renderSmallNumbers(this.state.coolantTemp) }
+						{ this.renderSmallHundredsNumbers(this.state.coolantTemp) }
 						<p className="small-number__label">Coolant Temp</p>
 					</li>
 				</ul>

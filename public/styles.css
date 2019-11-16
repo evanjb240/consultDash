@@ -105,6 +105,12 @@
   margin-left: -190px;
   margin-top: 365px;
 }
+.battery-volt__container{
+  display: inline-block;
+  min-width: 125px;
+  margin-left: 30px;
+}
+
 .small-number, .small-number--default, .small-number-three, .small-number-three--default{
   color: #fff;
   display: inline-block;
@@ -139,6 +145,11 @@
 .comma-image{
   width: 9px;
   transform: translateY(10px);
+}
+.period-image{
+  width: 9px;
+  transform: translateY(5px);
+  padding-right:5px;
 }
 .small-number, .small-number--default, 
 .small-number-three, .small-number-three--default, [class*=" rpm__"] {
@@ -207,10 +218,13 @@
     content: "\e909";
 }
 .rpm-num__container{
-  background: #34323b;
+  background: #302e36;
   padding: 10px;
   border-radius: 4px;
   display: inline-block;
+}
+.tenths{
+  margin-left:15px;
 }
 
 
@@ -301,7 +315,7 @@ body {
   display: flex;
 }
 .rpm__marker--background::after, .temp__marker--background{
-  background: #423E4A;
+  background: #34323b;
 }
 
 .mph{
@@ -357,7 +371,6 @@ body {
   left: 190px;
 }
 .temp__container{
-  display: flex;
   flex-direction: column;
   justify-content: center;
   margin-left: auto;
@@ -369,6 +382,7 @@ body {
   padding-top: 100px;
 }
 ul{
+  margin:0;
   padding: 0;
   width: 100%;
   display: flex;

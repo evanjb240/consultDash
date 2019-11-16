@@ -4,6 +4,7 @@ var Dash = React.createClass({
 			rpm: 0,
 			mph: 0,
 			coolantTemp: 0,
+			batteryVolt:0.0,
 			dash: "defaultDash",
 			drawer: false
 		};
@@ -15,6 +16,8 @@ var Dash = React.createClass({
 			that.setState({ rpm: data.rpm });
 			that.setState({ mph: data.mph });
 			that.setState({ coolantTemp: data.coolantTemp });
+			that.setState({ batteryVolt: data.batteryVolt });
+			console.log(data.batteryVolt);
 		});
 		this.socket.emit('fetchComments');
 	},
@@ -147,6 +150,36 @@ var Dash = React.createClass({
 				
 		);
 	},
+	renderSmallDecimalOnesNumbers: function (number) {
+		var tens = "small-number-three small-number-three";
+		var ones = "small-number-three small-number-three";
+		var tenths = "small-number-three tenths small-number-three";
+		if (number >=10){
+			tens += "--" + (number + "")[0]
+			ones += "--" + (number + "")[1]
+			tenths += "--" + (number + "")[3]
+		} else {
+			tens += "--default"
+			ones += "--" + (number + "")[0]
+			tenths += "--" + (number + "")[2]
+		}
+		return (
+			<div className="rpm-num__container">
+				<div className="rpm">
+					<span className={tens}></span>
+					<span className={ones}></span>
+					<span className={tenths}></span>
+				</div>
+				<div className="rpm--background">
+					<span className='small-number-three--default'></span>
+					<span className='small-number-three--default'></span>
+					<span><img className='period-image' src='./period.svg' /></span>
+					<span className='small-number-three--default'></span>
+				</div>
+			</div>
+
+		);
+	},
 	tempMarker: function (num, background) {
 		var divClass = !background ? "temp__marker" : "temp__marker--background"
 		var colors = ["#7BE7EC", "#89E8DC", "#96E9CE", "#A0EAC1", "#ABEBB4", "#BAEDA4", "#C5ED96", "#D1EE88", "#DDF07B", "#ECF16A", "#F0E966", "#F0DD68", "#F1D069", "#F2C36B", "#F3C36B", "#F4AA6E", "#F49D6F", "#F58F71", "#F58372", "#F77674"]
@@ -192,6 +225,10 @@ var Dash = React.createClass({
 				<div className="small-num__container">
 						{ this.renderSmallNumbers(this.state.rpm) }
 						<p className="small-number__label">RPM</p>
+				</div>
+				<div className="battery-volt__container">
+						{ this.renderSmallDecimalOnesNumbers(this.state.batteryVolt) }
+						<p className="small-number__label">Bat</p>
 				</div>
 				<div className="temp__container">
 					<ul>

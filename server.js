@@ -12,6 +12,7 @@ if (process.env.NODE_ENV != "development"){
 
 // All the values we are getting from the ECU
 var rpm, mph, coolantTemp = 0;
+var batteryVolt = 0.0;
 
 var currentData= [];
 var frameStarted = false;
@@ -71,18 +72,24 @@ function convertMPH(data){
   return convertKPH(data) * 0.6213711922;
 }
 
+function convertBatteryVoltage(data){
+  // data * 80 = mV
+  return (data*80)/1000;
+}
+
 function parseData(data){
 
   if(data !== undefined){
     rpm = convertRPM(data[1], data[2]);
     coolantTemp = convertCoolantTemp(data[0]);
     mph = convertMPH(data[3]);
+    batteryVolt = convertBatteryVoltage(data[4]);
   }
 
 }
 
 var isConnected = false;
-var command = [0x5A,0x08,0x5A,0x00,0x5A,0x01,0x5A,0x0b,0xF0];
+var command = [0x5A,0x08,0x5A,0x00,0x5A,0x01,0x5A,0x0b,0x5A,0x0c,0xF0];
 var bytesRequested = (command.length - 1) / 2;
 
 // Don't run this part for development.
@@ -140,8 +147,13 @@ io.on('connection', function (socket) {
         } else{
           coolantTemp = 0
         }
+        if(batteryVolt < 15){
+          batteryVolt+= 0.1;
+        }else{
+          batteryVolt = 0.0
+        }
       }
 
-      socket.emit('ecuData', {'rpm':Math.floor(rpm),'mph':Math.floor(mph),'coolantTemp':Math.floor(coolantTemp)});
+      socket.emit('ecuData', {'rpm':Math.floor(rpm),'mph':Math.floor(mph),'coolantTemp':Math.floor(coolantTemp), 'batteryVolt': batteryVolt});
     }, 100);
 });

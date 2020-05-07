@@ -37,7 +37,7 @@ to help guide you through it.
 
 ##### Install Dash
 
-`git clone https://github.com/gregsqueeb/consultDash.git`
+`git clone https://github.com/evanjb240/consultDash.git`
 
 `cd consultDash`
 

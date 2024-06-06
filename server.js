@@ -2,12 +2,11 @@ var PATH_TO_SERIAL_PORT = '';
 var path = require('path');
 var fs = require('fs');
 var express = require('express');
-var serialport = require("serialport");
-var SerialPort = serialport.SerialPort;
+var SerialPort = require("serialport");
 
 // Don't set the serialport on development
 if (process.env.NODE_ENV != "development"){
-  var sp = new SerialPort('/dev/ttyUSB0', { baudrate: 9600 }) ;
+  var sp = new SerialPort('/dev/ttyUSB0', { baudRate: 9600 }) ;
 }
 
 // All the values we are getting from the ECU

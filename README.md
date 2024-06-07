@@ -20,27 +20,31 @@ to help guide you through it.
 
 `sudo apt-get upgrade`
 
+####Node Options
+Option: 1 node/npm out of the box
+
 *NOTE: You must install node version v5.12 for the dash to work. Instructions on how to install a specific version of node incoming...*
 
 `sudo apt-get install nodejs npm`
 
+Option: 2 node/npm via nvm
+Use this link to install nvm https://www.freecodecamp.org/news/node-version-manager-nvm-install-guide
+
+Once nvm is installed:
+`nvm install v16.11.0`
+`nvm alias default v16.11.0`
+`nvm use v16.11.0`
 
 ##### Install Chromium
 
-`wget -qO - http://bintray.com/user/downloadSubjectPublicKey?username=bintray | sudo apt-key add -`
-
-`echo "deb http://dl.bintray.com/kusti8/chromium-rpi jessie main" | sudo tee -a /etc/apt/sources.list`
-
 `sudo apt-get update`
 
-`sudo apt-get install chromium-browser rpi-youtube -y`
+`sudo apt-get install chromium-browser -y`
 
 ##### Install Dash
 
 `git clone https://github.com/evanjb240/consultDash.git`
-
 `cd consultDash`
-
 `npm install`
 
 
@@ -48,27 +52,36 @@ to help guide you through it.
 
 `http://mausberrycircuits.com/pages/car-setup`
 
-Open Menu > Preferences > Default applications for LXSession
+Find the rc.local file and open it to point to the script needed to start the app
+`sudo nano /etc/rc.local`
 
-Add these two entries to Autostart
+If you used Option 1 in the Node options section add:
+`sudo sh /home/pi/consultDash/startScript.sh` 
+If you used Option 2 in the Node options section add:
+`sudo sh /home/pi/consultDash/startScriptNVM.sh`
+*Note: run `which node` to find out/double-check the exact path of your node version and adjust startScriptNVM.sh as needed*
+*Note: remove NODE_ENV=development when ready to run in the car*
 
-`@/home/pi/consultDash/startScript.sh`
+Edit the autostart file to start the chromium-browser on reboot
+`sudo nano /etc/xdg/lxsession/LXDE-pi/autostart`
 
+Add this entry to Autostart
 `@chromium-browser —kiosk --incognito file:///home/pi/consultDash/re-direct-page.html`
 
+Once those are done, you can run `sudo reboot` to test it out. Assuming all is good, Alt+F4 to quit kiosk mode 
 
 ### Related guides
 
 - [How to install a consult port](https://youtu.be/6Vd9oKWORPs?t=164)
 - [How to install the OS on your Raspberry Pi](https://www.raspberrypi.org/learning/software-guide/quickstart/)
-- [How to guide on installing that dash and power supply software](https://github.com/gregsqueeb/consultDash)
+- [How to guide on installing that dash and power supply software (original)](https://github.com/gregsqueeb/consultDash)
+- [How to guide on installing that dash and power supply software (forked)](https://github.com/evanjb240/consultDash)
 
 ### Suggested hardware
 
 - [Raspberry Pi 3](https://www.adafruit.com/products/3055)
 - [Touch screen](https://www.adafruit.com/products/2718)
 - [Mausberry Circuit Power Supply](https://www.mausberrycircuits.com/collections/frontpage/products/4amp-car-supply-switch)
-- [USB Consult cable](http://www.ebay.com/itm/14-Pin-Consult-II-OBD-DDL-USB-Interface-Diagnostic-Scanner-Tool-For-Nissan-Z32-/291644411718?hash=item43e75c8f46:g:bOkAAOSwQM9UZfVB&item=291644411718&vxp=mtr) (I am pretty sure this will work but I have not tested it yet. Let me know if you get it and it works)
 
 or
 

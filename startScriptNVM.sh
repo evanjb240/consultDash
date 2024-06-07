@@ -1,0 +1,1 @@
+NODE_ENV=development /home/pi/.config/nvm/versions/node/v16.11.0/bin/node /home/pi/consultDash/server.js
